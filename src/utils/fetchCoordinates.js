@@ -17,5 +17,6 @@ export const fetchCoordinates = async (city) => {
     return { lat, lng };
   } catch (error) {
     console.log(error);
+    return;
   }
 };

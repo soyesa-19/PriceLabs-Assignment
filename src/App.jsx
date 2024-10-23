@@ -14,6 +14,7 @@ function App() {
     e.preventDefault();
     if (parseInt(pageSize) <= 0 || !searchText) {
       alert("Please enter correct details");
+
       return;
     }
     setLoading(true);
@@ -21,6 +22,7 @@ function App() {
     console.log(lat, lng);
     if (!lat || !lng) {
       alert("Please enter valid a valid address");
+      setLoading(false);
       return;
     }
     const listingFormattedData = await fetchListings(
@@ -33,6 +35,7 @@ function App() {
       alert(
         "No listings found for the entered address! Please enter valid or another address"
       );
+      setLoading(false);
       return;
     }
     setListings(listingFormattedData);
@@ -71,7 +74,7 @@ function App() {
             {loading ? "loading..." : "Submit"}
           </button>
         </form>
-        {listings && !loading && (
+        {listings?.length > 0 && !loading && (
           <Download
             listings={listings}
             setListings={setListings}
